@@ -16,4 +16,3 @@ deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF 
 apt update
 apt install -y kubelet kubeadm kubectl
-
