@@ -12,3 +12,5 @@ apt update && apt install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 
 apt update
 apt install -y kubelet kubeadm kubectl docker.io 
+systemctl enable docker
+systemctl enable kubelet
