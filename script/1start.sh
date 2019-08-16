@@ -10,6 +10,9 @@ sed -i '2i\192.168.1.222 kmaster02 kmaster02.lan' /etc/hosts
 sed -i '3i\192.168.1.223 kmaster03 kmaster03.lan' /etc/hosts
 sed -i '4i\192.168.1.224 kmaster04 kmaster04.lan' /etc/hosts
 sed -i '5i\192.168.1.225 kmaster05 kmaster05.lan' /etc/hosts
+sed -i '6i\192.168.88.221 vmaster01' /etc/hosts
+sed -i '7i\192.168.88.222 vmaster02' /etc/hosts
+sed -i '8i\192.168.88.223 vmaster03' /etc/hosts
 echo "Необходимо указать новый пароль пользователя root!!!"
 passwd root
 service sshd restart
