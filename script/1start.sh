@@ -4,6 +4,7 @@ echo "Запуск обновления"
 apt -y install mc wget curl
 sed -i '32c\PermitRootLogin yes' /etc/ssh/sshd_config
 swapoff -a
+timedatectl set-timezone Asia/Yekaterinburg
 sed -i 's!/swap!#/swap!' /etc/fstab
 sed -i '1i\192.168.1.221 kmaster01 kmaster01.lan' /etc/hosts
 sed -i '2i\192.168.1.222 kmaster02 kmaster02.lan' /etc/hosts
