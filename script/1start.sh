@@ -18,3 +18,4 @@ echo "Необходимо указать новый пароль пользов
 passwd root
 service sshd restart
 reboot
+
