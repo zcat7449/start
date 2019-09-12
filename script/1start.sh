@@ -3,8 +3,8 @@ echo "Start script"
 echo "Запуск обновления"
 apt -y install mc wget curl
 sed -i '32c\PermitRootLogin no' /etc/ssh/sshd_config
-sed -i '33c\Match Address 192.168.1.0/24' /etc/ssh/sshd_config
-sed -i '34c\     PermitRootLogin yes' /etc/ssh/sshd_config
+sed -i '122i\Match Address 192.168.1.0/24' /etc/ssh/sshd_config
+sed -i '123i\	     PermitRootLogin yes' /etc/ssh/sshd_config
 swapoff -a
 timedatectl set-timezone Asia/Yekaterinburg
 sed -i 's!/swap!#/swap!' /etc/fstab
