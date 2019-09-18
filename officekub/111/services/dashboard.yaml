@@ -1,0 +1,38 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "dashboard",
+    "namespace": "dev",
+    "selfLink": "/api/v1/namespaces/dev/services/dashboard",
+    "uid": "c8319447-b1ea-11e9-a080-ca8e8d9a9b39",
+    "resourceVersion": "11081001",
+    "creationTimestamp": "2019-07-29T10:22:35Z",
+    "labels": {
+      "app": "dashboard",
+      "chart": "dashboard-0.2.0",
+      "heritage": "Tiller",
+      "release": "fdbd-dev"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "http",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": "http"
+      }
+    ],
+    "selector": {
+      "app": "dashboard",
+      "release": "fdbd-dev"
+    },
+    "clusterIP": "10.0.110.123",
+    "type": "ClusterIP",
+    "sessionAffinity": "None"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "kind": "Ingress",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "fdbd-dev-ingress",
+    "namespace": "dev",
+    "selfLink": "/apis/extensions/v1beta1/namespaces/dev/ingresses/fdbd-dev-ingress",
+    "uid": "c8b86585-b1ea-11e9-a080-ca8e8d9a9b39",
+    "resourceVersion": "11081044",
+    "generation": 1,
+    "creationTimestamp": "2019-07-29T10:22:35Z",
+    "labels": {
+      "app": "fdbd",
+      "chart": "fdbd-0.2.0",
+      "heritage": "Tiller",
+      "release": "fdbd-dev"
+    },
+    "annotations": {
+      "nginx.ingress.kubernetes.io/cors-allow-headers": "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,StoreId",
+      "nginx.ingress.kubernetes.io/cors-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
+      "nginx.ingress.kubernetes.io/cors-allow-origin": "https://dev.fdbd.idscan.net, http://localhost:5001, http://localhost:15001",
+      "nginx.ingress.kubernetes.io/enable-cors": "true"
+    }
+  },
+  "spec": {
+    "tls": [
+      {
+        "hosts": [
+          "dev.fdbd.idscan.net",
+          "dev.identity.fdbd.idscan.net",
+          "dev.api.fdbd.idscan.net"
+        ],
+        "secretName": "fdbd-dev-tls-secret-prod"
+      }
+    ],
+    "rules": [
+      {
+        "host": "dev.fdbd.idscan.net",
+        "http": {
+          "paths": [
+            {
+              "path": "/",
+              "backend": {
+                "serviceName": "dashboard",
+                "servicePort": "http"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "host": "dev.identity.fdbd.idscan.net",
+        "http": {
+          "paths": [
+            {
+              "path": "/",
+              "backend": {
+                "serviceName": "identity",
+                "servicePort": "http"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "host": "dev.api.fdbd.idscan.net",
+        "http": {
+          "paths": [
+            {
+              "path": "/m",
+              "backend": {
+                "serviceName": "mobileapigw",
+                "servicePort": "http"
+              }
+            },
+            {
+              "path": "/w",
+              "backend": {
+                "serviceName": "webapigw",
+                "servicePort": "http"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "status": {
+    "loadBalancer": {
+      "ingress": [
+        {}
+      ]
+    }
+  }
+}

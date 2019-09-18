@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "customerreturnservice.fullname" . }}
+  labels:
+    app: {{ template "customerreturnservice.name" . }}
+    chart: {{ template "customerreturnservice.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "customerreturnservice.name" . }}
+    release: {{ .Release.Name }}

@@ -1,0 +1,28 @@
+{{- if .Values.ingress.tls -}}
+{{- $fullName := include "fdbdapp.fullname" . -}}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: {{ $fullName }}-tls-secret
+spec:
+  secretName: {{ $fullName }}-tls-secret-prod
+  {{- range .Values.ingress.tls }}
+  dnsNames:
+  {{- range .hosts }}
+  - {{ . }}
+  {{- end }}
+  {{- end }}
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      {{- range .Values.ingress.tls }}
+      domains:
+      {{- range .hosts }}
+      - {{ . -}}
+      {{- end -}}
+      {{- end }}
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+{{- end }}

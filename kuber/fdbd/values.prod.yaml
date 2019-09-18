@@ -1,0 +1,86 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://fdbd.k8s.idware.net"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,StoreId"
+  tls:
+  - hosts:
+    - fdbd.k8s.idware.net
+    - identity.fdbd.k8s.idware.net
+    - api.fdbd.k8s.idware.net
+    secretName: tls-secret-prod
+  hosts:
+  - host: fdbd.k8s.idware.net
+    paths:
+    - path: /
+      backend: dashboard
+  - host: identity.fdbd.k8s.idware.net
+    paths:
+    - path: /
+      backend: identity
+  - host: api.fdbd.k8s.idware.net
+    paths:
+    - path: /m
+      backend: mobileapigw
+    - path: /w
+      backend: webapigw
+
+mobileapigw:
+  replicaCount: 2
+  image:
+    tag: lsd-1909.04.1
+  env:
+    PATH_BASE: /m
+    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_URLS: http://+:80
+    IdentityUrlExternal: http://identity
+    Services__identity: identity
+    Services__api: api
+
+webapigw:
+  replicaCount: 2
+  image:
+    tag: lsd-1909.04.1
+  env:
+    PATH_BASE: /w
+    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_URLS: http://+:80
+    IdentityUrlExternal: http://identity
+    Services__identity: identity
+    Services__api: api
+
+dashboard:
+  replicaCount: 2
+  image:
+    tag: lsd-1909.04.1
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_URLS: http://+:80
+    IdentityUrlExternal: https://identity.fdbd.k8s.idware.net
+    WebApiUrlExternal: https://api.fdbd.k8s.idware.net/w
+    IntegrationServices__identity: identity
+    IntegrationServices__webapigw: webapigw
+
+identity:
+  image:
+    tag: lsd-1909.04.1
+  connectionStrings:
+    DatabaseConnection: MAIN_DB
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_URLS: http://+:80
+    Clients__Dashboard: https://fdbd.k8s.idware.net
+    IntegrationServices__api: api
+
+api:
+  replicaCount: 2
+  image:
+    tag: lsd-1909.04.1
+  connectionStrings:
+    DatabaseConnection: MAIN_DB
+  env:
+    ASPNETCORE_ENVIRONMENT: Production
+    ASPNETCORE_URLS: http://+:80

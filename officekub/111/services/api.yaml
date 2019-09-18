@@ -1,0 +1,38 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "api",
+    "namespace": "dev",
+    "selfLink": "/api/v1/namespaces/dev/services/api",
+    "uid": "3b88be32-bdc5-11e9-af63-7213e77854b2",
+    "resourceVersion": "11100145",
+    "creationTimestamp": "2019-08-13T12:24:01Z",
+    "labels": {
+      "app": "api",
+      "chart": "api-0.2.0",
+      "heritage": "Tiller",
+      "release": "fdbd-dev"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "http",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": "http"
+      }
+    ],
+    "selector": {
+      "app": "api",
+      "release": "fdbd-dev"
+    },
+    "clusterIP": "10.0.126.89",
+    "type": "ClusterIP",
+    "sessionAffinity": "None"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

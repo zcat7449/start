@@ -1,0 +1,38 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "identity",
+    "namespace": "dev",
+    "selfLink": "/api/v1/namespaces/dev/services/identity",
+    "uid": "c83f207a-b1ea-11e9-a080-ca8e8d9a9b39",
+    "resourceVersion": "11081004",
+    "creationTimestamp": "2019-07-29T10:22:35Z",
+    "labels": {
+      "app": "identity",
+      "chart": "identity-0.2.0",
+      "heritage": "Tiller",
+      "release": "fdbd-dev"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "http",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": "http"
+      }
+    ],
+    "selector": {
+      "app": "identity",
+      "release": "fdbd-dev"
+    },
+    "clusterIP": "10.0.9.129",
+    "type": "ClusterIP",
+    "sessionAffinity": "None"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

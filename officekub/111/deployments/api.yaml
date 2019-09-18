@@ -1,0 +1,149 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "api",
+    "namespace": "dev",
+    "selfLink": "/apis/extensions/v1beta1/namespaces/dev/deployments/api",
+    "uid": "3bb366b9-bdc5-11e9-af63-7213e77854b2",
+    "resourceVersion": "17454517",
+    "generation": 80,
+    "creationTimestamp": "2019-08-13T12:24:01Z",
+    "labels": {
+      "app": "api",
+      "chart": "api-0.2.0",
+      "draft": "draft-app",
+      "heritage": "Tiller",
+      "release": "fdbd-dev"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "80"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "api",
+        "release": "fdbd-dev"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "app": "api",
+          "draft": "draft-app",
+          "release": "fdbd-dev"
+        },
+        "annotations": {
+          "buildID": ""
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "api",
+            "image": "fdbdcontainerregistry.azurecr.io/api:lsd-1909.16.2",
+            "ports": [
+              {
+                "name": "http",
+                "containerPort": 80,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "ASPNETCORE_ENVIRONMENT",
+                "value": "Development"
+              },
+              {
+                "name": "ASPNETCORE_URLS",
+                "value": "http://+:80"
+              },
+              {
+                "name": "IdentityUrlExternal",
+                "value": "https://dev.identity.fdbd.idscan.net"
+              },
+              {
+                "name": "ConnectionStrings__DatabaseConnection",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "connection-strings",
+                    "key": "MAIN_DB"
+                  }
+                }
+              }
+            ],
+            "resources": {},
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/liveness",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 10,
+              "timeoutSeconds": 1,
+              "periodSeconds": 15,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/hc",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "timeoutSeconds": 1,
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {},
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": "25%",
+        "maxSurge": "25%"
+      }
+    },
+    "revisionHistoryLimit": 10,
+    "progressDeadlineSeconds": 600
+  },
+  "status": {
+    "observedGeneration": 80,
+    "replicas": 1,
+    "updatedReplicas": 1,
+    "readyReplicas": 1,
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "type": "Available",
+        "status": "True",
+        "lastUpdateTime": "2019-09-14T05:01:41Z",
+        "lastTransitionTime": "2019-09-14T05:01:41Z",
+        "reason": "MinimumReplicasAvailable",
+        "message": "Deployment has minimum availability."
+      },
+      {
+        "type": "Progressing",
+        "status": "True",
+        "lastUpdateTime": "2019-09-16T11:02:28Z",
+        "lastTransitionTime": "2019-08-13T12:24:02Z",
+        "reason": "NewReplicaSetAvailable",
+        "message": "ReplicaSet \"api-bb6ff4899\" has successfully progressed."
+      }
+    ]
+  }
+}

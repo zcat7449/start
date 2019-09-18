@@ -1,0 +1,16 @@
+dependencies:
+  - name: api
+    version: 0.2.0
+    repository: "api"
+  - name: identity
+    version: 0.2.0
+    repository: "identity"
+  - name: dashboard
+    version: 0.2.0
+    repository: "dashboard"
+  - name: mobileapigw
+    version: 0.2.0
+    repository: "mobileapigw"
+  - name: webapigw
+    version: 0.2.0
+    repository: "webapigw"
