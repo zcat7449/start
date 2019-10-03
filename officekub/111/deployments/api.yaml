@@ -63,7 +63,7 @@
               },
               {
                 "name": "IdentityUrlExternal",
-                "value": "https://dev.identity.fdbd.idscan.net"
+                "value": "https://dev.identity.fdbd.k8s.idware.net"
               },
               {
                 "name": "ConnectionStrings__DatabaseConnection",
