@@ -30,7 +30,7 @@ ingress:
 
 mobileapigw:
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   env:
     PATH_BASE: /m
     ASPNETCORE_ENVIRONMENT: Staging
@@ -41,7 +41,9 @@ mobileapigw:
 
 webapigw:
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
+  connectionStrings:
+    DatabaseConnection: MAIN_DB
   env:
     PATH_BASE: /w
     ASPNETCORE_ENVIRONMENT: Staging
@@ -52,7 +54,7 @@ webapigw:
 
 dashboard:
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   env:
     ASPNETCORE_ENVIRONMENT: Production
     ASPNETCORE_URLS: http://+:80
@@ -63,7 +65,7 @@ dashboard:
 
 identity:
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   connectionStrings:
     DatabaseConnection: MAIN_DB
   env:
@@ -74,7 +76,7 @@ identity:
 
 api:
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   connectionStrings:
     DatabaseConnection: MAIN_DB
   env:
