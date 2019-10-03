@@ -18,7 +18,7 @@
     "annotations": {
       "nginx.ingress.kubernetes.io/cors-allow-headers": "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,StoreId",
       "nginx.ingress.kubernetes.io/cors-allow-methods": "PUT, GET, POST, DELETE, OPTIONS",
-      "nginx.ingress.kubernetes.io/cors-allow-origin": "https://dev.fdbd.idscan.net, http://localhost:5001, http://localhost:15001",
+      "nginx.ingress.kubernetes.io/cors-allow-origin": "https://dev.fdbd.k8s.idware.net, http://localhost:5001, http://localhost:15001",
       "nginx.ingress.kubernetes.io/enable-cors": "true"
     }
   },
@@ -26,16 +26,16 @@
     "tls": [
       {
         "hosts": [
-          "dev.fdbd.idscan.net",
-          "dev.identity.fdbd.idscan.net",
-          "dev.api.fdbd.idscan.net"
+          "dev.fdbd.k8s.idware.net",
+          "dev.identity.fdbd.k8s.idware.net",
+          "dev.api.fdbd.k8s.idware.net"
         ],
         "secretName": "fdbd-dev-tls-secret-prod"
       }
     ],
     "rules": [
       {
-        "host": "dev.fdbd.idscan.net",
+        "host": "dev.fdbd.k8s.idware.net",
         "http": {
           "paths": [
             {
@@ -49,7 +49,7 @@
         }
       },
       {
-        "host": "dev.identity.fdbd.idscan.net",
+        "host": "dev.identity.fdbd.k8s.idware.net",
         "http": {
           "paths": [
             {
@@ -63,7 +63,7 @@
         }
       },
       {
-        "host": "dev.api.fdbd.idscan.net",
+        "host": "dev.api.fdbd.k8s.idware.net",
         "http": {
           "paths": [
             {
