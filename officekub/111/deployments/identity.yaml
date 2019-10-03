@@ -64,7 +64,7 @@
               },
               {
                 "name": "Clients__Dashboard",
-                "value": "https://dev.fdbd.idscan.net"
+                "value": "https://dev.fdbd.k8s.idware.net"
               },
               {
                 "name": "IntegrationServices__api",
