@@ -63,7 +63,7 @@
               },
               {
                 "name": "IdentityUrlExternal",
-                "value": "https://dev.identity.fdbd.idscan.net"
+                "value": "https://dev.identity.fdbd.k8s.idware.net"
               },
               {
                 "name": "PATH_BASE",
@@ -79,7 +79,7 @@
               },
               {
                 "name": "ocelot_GlobalConfiguration__BaseUrl",
-                "value": "https://dev.api.fdbd.idscan.net/w"
+                "value": "https://dev.api.fdbd.k8s.idware.net/w"
               },
               {
                 "name": "ConnectionStrings__DatabaseConnection",
