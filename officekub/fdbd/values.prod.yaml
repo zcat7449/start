@@ -31,7 +31,7 @@ ingress:
 mobileapigw:
   replicaCount: 2
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   env:
     PATH_BASE: /m
     ASPNETCORE_ENVIRONMENT: Production
@@ -43,7 +43,9 @@ mobileapigw:
 webapigw:
   replicaCount: 2
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
+  connectionStrings:
+    DatabaseConnection: MAIN_DB
   env:
     PATH_BASE: /w
     ASPNETCORE_ENVIRONMENT: Production
@@ -55,7 +57,7 @@ webapigw:
 dashboard:
   replicaCount: 2
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   env:
     ASPNETCORE_ENVIRONMENT: Production
     ASPNETCORE_URLS: http://+:80
@@ -66,7 +68,7 @@ dashboard:
 
 identity:
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   connectionStrings:
     DatabaseConnection: MAIN_DB
   env:
@@ -78,7 +80,7 @@ identity:
 api:
   replicaCount: 2
   image:
-    tag: lsd-1909.04.1
+    tag: lsd-1910.02.2
   connectionStrings:
     DatabaseConnection: MAIN_DB
   env:
