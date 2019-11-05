@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Start script"
 echo "Запуск обновления"
-apt -y install mc wget curl
+apt -y install mc wget curl docker.io docker-compose
 sed -i '32c\PermitRootLogin no' /etc/ssh/sshd_config
 sed -i '122i\Match Address 192.168.88.1' /etc/ssh/sshd_config
 sed -i '123i\	     PermitRootLogin no' /etc/ssh/sshd_config
