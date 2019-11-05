@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Start script"
 echo "Запуск обновления"
-apt -y install mc wget curl docker.io docker-compose
+apt -y install mc wget curl
 sed -i '32c\PermitRootLogin no' /etc/ssh/sshd_config
 sed -i '122i\Match Address 192.168.88.1' /etc/ssh/sshd_config
 sed -i '123i\	     PermitRootLogin no' /etc/ssh/sshd_config
@@ -18,6 +18,7 @@ sed -i '5i\192.168.88.225 kmaster05 kmaster05.lan' /etc/hosts
 sed -i '6i\192.168.88.221 vmaster01' /etc/hosts
 sed -i '7i\192.168.88.222 vmaster02' /etc/hosts
 sed -i '8i\192.168.88.223 vmaster03' /etc/hosts
+sed -i '31i\zcat ALL=(ALL) NOPASSWD: ALL' /etc/sudoers
 echo "!!!Необходимо указать новый пароль пользователя root!!!"
 passwd root
 service sshd restart
